@@ -1,7 +1,10 @@
 import {useEffect, useState} from "react";
-import Input from "./Input";
+import Input from "./InputNumber";
 import InputText from "./InputText";
 import InputSelect from "./InputSelect";
+import InputNumber from "./InputNumber";
+import Button from "./Button";
+import PhotoContainer from "./PhotoContainer";
 
 const peselValidation = (inputValue) => {
     let weight = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
@@ -36,13 +39,13 @@ const nipValidation = (inputValue) => {
 const validation = (inputValue) => {
     let _errorsPesel = []
     let _errorsNip = []
-    let _errorEmpty = ['wybierz osoba lub firma']
+    let _errorEmpty = ['Podaj typ']
 
     if (peselValidation(inputValue) === false) {
-        _errorsPesel.push('podaj właściwy nr PESEL')
+        _errorsPesel.push('Podaj właściwy nr PESEL')
     }
     if (nipValidation(inputValue) === false) {
-        _errorsNip.push('podaj właściwy nr NIP')
+        _errorsNip.push('Podaj właściwy nr NIP')
     }
 
     if (inputValue.select === 'osoba') {
@@ -148,50 +151,43 @@ const Form = () => {
 
     return (
         <>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}
+        className = 'form'>
 
-            <InputText label={'podaj imię'} name={'name'}
+            <InputText label={'Imię'} name={'name'}
                        inputValue={inputValue.name}
                        handleChange={handleChange}/>
 
-            <InputText label={'podaj nazwisko'} name={'surname'}
+            <InputText label={'Nazwisko'} name={'surname'}
                        inputValue={inputValue.surname}
                        handleChange={handleChange}/>
 
             <InputSelect inputValue={inputValue}
                          handleChange={handleChange}/>
 
-            {/*<select name='select'*/}
-            {/*        value={inputValue.select}*/}
-            {/*        onChange={handleChange}*/}
-            {/*>*/}
-            {/*    <option value=''>wybierz</option>*/}
-            {/*    <option value='osoba'>osoba</option>*/}
-            {/*    <option value='firma'>firma</option>*/}
-            {/*</select>*/}
-
-            {/*<h2>numer indentyfikacyjny</h2>*/}
-
-            <Input inputValue={inputValue}
+            <InputNumber inputValue={inputValue}
                    handleChange={handleChange}
             />
 
-            {/*<input type = 'file' name = 'file'*/}
-            {/*       value={inputValue.file}*/}
-            {/*       onChange={handlechange}*/}
-            {/*/>*/}
+            <p className = 'errors' >{errors}</p>
 
-            <input type='file'
-                // name = 'file'
-                // value={inputValue.file}
-                // value={file}
-
+            <input type = 'file'
+                   id = 'file'
                    accept="image/jpg, image/jpeg"
                    placeholder='załącz'
                    onChange={e => setImage(e.target.files[0])}
+                   className = 'inputFile'
             />
 
-            <button>wyslij</button>
+            <label for = 'file'
+            className = 'inputLabel--file'
+            >
+                Wybież plik
+            </label>
+
+         {/*<PhotoContainer previev = {previev}/>*/}
+           {/*<Button/>*/}
+
 
             {/*<h1>{errors}</h1>*/}
             {/*{sented && <h1>wyslane</h1>}*/}
@@ -199,14 +195,8 @@ const Form = () => {
             {/*{previev &&*/}
             {/*    <img src={previev} style={{width: 100, height: 100}}/>*/}
             {/*}*/}
-
+            {sented && <h1>wyslane</h1>}
         </form>
-    <h1>{errors}</h1>
-    {sented && <h1>wyslane</h1>}
-
-    {previev &&
-    <img src={previev} style={{width: 100, height: 100}}/>
-    }
         </>
 
     );

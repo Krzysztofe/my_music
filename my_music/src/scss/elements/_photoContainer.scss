@@ -1,0 +1,25 @@
+.photoContainer{
+display: flex;
+  height: 100px;
+  margin-top: $space-large;
+}
+
+.photo{
+  width: 100px;
+  height: 100px;
+}
+
+.button{
+  margin-left: auto;
+  padding: 0.4em 0;
+  width: 40%;
+  align-self: end;
+ height: fit-content;
+  background-color: $color-opacity ;
+  border: none;
+  font-weight: bold;
+  &:focus,
+  &:hover{
+    background-color: $color-white;
+  }
+}

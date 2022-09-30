@@ -1,0 +1,10 @@
+.form{
+  padding: $space-large;
+backdrop-filter: blur(8px);
+  display: flex;
+  //flex-direction: column;
+  flex-wrap: wrap;
+  width: clamp(300px, 100vw, 800px);
+  //width: clamp(300px, 80%, 800px )
+  //width: clamp(300px, 100%, 800px);
+}
