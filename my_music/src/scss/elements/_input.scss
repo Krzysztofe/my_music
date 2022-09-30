@@ -1,18 +1,17 @@
-.inputContainer{
+.inputs {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-large;
+}
+
+.inputContainer {
   width: 100%;
   display: flex;
   flex-direction: column;
-  //flex: 1 1 200px;
-  margin-top: $space-large;
 }
 
-
-
-//.inputContainer + .inputContainer{
-//  margin-top: $space-large;
-//}
-
-.inputLabel{
+.inputLabel {
   margin-bottom: $space-small;
   color: $color-white;
   font-weight: $semiBold;
@@ -22,32 +21,30 @@
   padding: 0.2em;
   outline: none;
   border: none;
-  background-color: rgba(255,255,255, 0.7);
+  background-color: rgba(255, 255, 255, 0.7);
+
   &:focus,
   &:hover {
     background-color: $color-white;
   }
 }
 
-.inputFile{
-  display: none;
-  margin-top: $space-large;
-}
-
-.inputLabel--file{
-    margin-top: $space-large;
-  padding: 0.2em;
-  background-color:$color-opacity;
-  cursor: pointer;
-  &:focus,
-  &:hover{
-    background-color: $color-white;
-  }
-}
-
-.errors{
+.errors {
   height: $space-small;
   font-size: $font-size-superSmall;
   color: $color-white;
   margin-top: 0.2em;
+}
+
+@media (min-width: 515px) {
+  .inputs{
+    gap: $space-large * 1.5;
+  }
+
+  .inputContainer {
+    flex: 1 1 45%;
+  }
+  .inputLabel {
+    margin-bottom: $space-large;
+  }
 }

@@ -52,7 +52,7 @@ const validation = (inputValue) => {
         return _errorsPesel
     } else if (inputValue.select === "firma") {
         return _errorsNip
-    } else if (inputValue.select === ""){
+    } else if (inputValue.select === "") {
         return _errorEmpty
     }
 
@@ -62,7 +62,8 @@ const Form = () => {
 
     const [inputValue, setInputValue] = useState({
         name: '', surname: '', select: '',
-        pesel: "", nip: ""
+        pesel: "", nip: "",
+        yyy: ""
     })
     const [image, setImage] = useState('')
     const [formData, setFormData] = useState({})
@@ -151,52 +152,48 @@ const Form = () => {
 
     return (
         <>
-        <form onSubmit={handleSubmit}
-        className = 'form'>
+            <form onSubmit={handleSubmit}
+                  className='form'>
+<div className = "inputs">
 
-            <InputText label={'Imię'} name={'name'}
-                       inputValue={inputValue.name}
-                       handleChange={handleChange}/>
+                <InputText label={'Imię'} name={'name'}
+                           inputValue={inputValue.name}
+                           handleChange={handleChange}/>
 
-            <InputText label={'Nazwisko'} name={'surname'}
-                       inputValue={inputValue.surname}
-                       handleChange={handleChange}/>
+                <InputText label={'Nazwisko'} name={'surname'}
+                           inputValue={inputValue.surname}
+                           handleChange={handleChange}/>
 
-            <InputSelect inputValue={inputValue}
-                         handleChange={handleChange}/>
+                <InputSelect inputValue={inputValue}
+                             handleChange={handleChange}/>
 
-            <InputNumber inputValue={inputValue}
-                   handleChange={handleChange}
-            />
+                <InputNumber inputValue={inputValue}
+                             handleChange={handleChange}
+                             errors={errors}
+                />
+</div>
+                {/*<p className = 'errors' >{errors}</p>*/}
 
-            <p className = 'errors' >{errors}</p>
+                {/*<input type='file'*/}
+                {/*       id='file'*/}
+                {/*       accept="image/jpg, image/jpeg"*/}
+                {/*       placeholder='załącz'*/}
+                {/*       onChange={e => setImage(e.target.files[0])}*/}
+                {/*       className='inputFile'*/}
+                {/*/>*/}
 
-            <input type = 'file'
-                   id = 'file'
-                   accept="image/jpg, image/jpeg"
-                   placeholder='załącz'
-                   onChange={e => setImage(e.target.files[0])}
-                   className = 'inputFile'
-            />
+                {/*<label for='file'*/}
+                {/*       className='inputLabel--file'*/}
+                {/*>*/}
+                {/*    Wybież plik*/}
+                {/*</label>*/}
 
-            <label for = 'file'
-            className = 'inputLabel--file'
-            >
-                Wybież plik
-            </label>
+                <PhotoContainer previev={previev}
+                                setImage = {setImage}
+                />
 
-         {/*<PhotoContainer previev = {previev}/>*/}
-           {/*<Button/>*/}
-
-
-            {/*<h1>{errors}</h1>*/}
-            {/*{sented && <h1>wyslane</h1>}*/}
-
-            {/*{previev &&*/}
-            {/*    <img src={previev} style={{width: 100, height: 100}}/>*/}
-            {/*}*/}
-            {sented && <h1>wyslane</h1>}
-        </form>
+                {sented && <h1>wyslane</h1>}
+            </form>
         </>
 
     );

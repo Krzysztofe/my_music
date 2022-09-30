@@ -1,4 +1,4 @@
-const InputNumber = ({inputValue, handleChange}) => {
+const InputNumber = ({inputValue, handleChange, errors}) => {
 
     if (inputValue.select === 'osoba') {
 
@@ -14,6 +14,7 @@ const InputNumber = ({inputValue, handleChange}) => {
                        placeholder='PESEL'
                        className = 'input'
                 />
+                <p className = 'errors' >{errors}</p>
             </div>
         )
     } else if (inputValue.select === '') {
@@ -26,8 +27,10 @@ const InputNumber = ({inputValue, handleChange}) => {
                 <input type='text'
                        value={''}
                        placeholder='Wybież typ'
+                       onChange={handleChange}
                        className = 'input'
                 />
+                <p className = 'errors' >{errors}</p>
             </div>
         )
     } else {
@@ -43,6 +46,7 @@ const InputNumber = ({inputValue, handleChange}) => {
                        placeholder='NIP'
                        className = 'input'
                 />
+                <p className = 'errors' >{errors}</p>
             </div>
         )
     }
