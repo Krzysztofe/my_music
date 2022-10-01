@@ -2,6 +2,8 @@
   backdrop-filter: blur(8px);
   padding: $space-large;
   width: clamp(300px, 100vw, 800px);
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 @media (min-width: 515px ) {

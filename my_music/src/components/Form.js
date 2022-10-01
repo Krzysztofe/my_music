@@ -36,7 +36,7 @@ const nipValidation = (inputValue) => {
 }
 
 
-const validation = (inputValue) => {
+const validation = (inputValue, selectValue) => {
     let _errorsPesel = []
     let _errorsNip = []
     let _errorEmpty = ['Podaj typ']
@@ -48,11 +48,11 @@ const validation = (inputValue) => {
         _errorsNip.push('Podaj właściwy nr NIP')
     }
 
-    if (inputValue.select === 'osoba') {
+    if (selectValue === 'Osoba') {
         return _errorsPesel
-    } else if (inputValue.select === "firma") {
+    } else if (selectValue === "Firma") {
         return _errorsNip
-    } else if (inputValue.select === "") {
+    } else if (selectValue === "Wybierz") {
         return _errorEmpty
     }
 
@@ -63,9 +63,10 @@ const Form = () => {
     const [inputValue, setInputValue] = useState({
         name: '', surname: '', select: '',
         pesel: "", nip: "",
-        yyy: ""
     })
     const [image, setImage] = useState('')
+    const [selectValue, setSelectValue] = useState('Wybierz')
+
     const [formData, setFormData] = useState({})
     const [errors, setErrors] = useState([])
 
@@ -73,6 +74,11 @@ const Form = () => {
 
     const [sented, setSented] = useState(false)
     const [pending, setPending] = useState(false)
+
+
+    const handleSelect = (string) => {
+        setSelectValue(string)
+    }
 
     const handleChange = (e) => {
 
@@ -112,21 +118,22 @@ const Form = () => {
 // console.log(validation(inputValue))
     const handleSubmit = (e) => {
         e.preventDefault()
-        setErrors(validation(inputValue))
-        if (validation(inputValue).length > 0) {
+        setErrors(validation(inputValue, selectValue))
+        if (validation(inputValue, selectValue).length > 0) {
             return
         }
         setInputValue({
             name: '', surname: '', select: '',
             pesel: "", nip: ""
         })
-
+        setSelectValue('wybierz')
 
         setFormData({
             ...formData,
             name: inputValue.name,
             surname: inputValue.surname,
             pesel: inputValue.pesel,
+            nip: inputValue.nip,
             image: [image]
         })
         setImage('')
@@ -154,42 +161,29 @@ const Form = () => {
         <>
             <form onSubmit={handleSubmit}
                   className='form'>
-<div className = "inputs">
+                <div className="inputs">
 
-                <InputText label={'Imię'} name={'name'}
-                           inputValue={inputValue.name}
-                           handleChange={handleChange}/>
+                    <InputText label={'Imię'} name={'name'}
+                               inputValue={inputValue.name}
+                               handleChange={handleChange}/>
 
-                <InputText label={'Nazwisko'} name={'surname'}
-                           inputValue={inputValue.surname}
-                           handleChange={handleChange}/>
+                    <InputText label={'Nazwisko'} name={'surname'}
+                               inputValue={inputValue.surname}
+                               handleChange={handleChange}/>
 
-                <InputSelect inputValue={inputValue}
-                             handleChange={handleChange}/>
+                    <InputSelect selectValue={selectValue}
+                                 handleSelect={handleSelect}/>
 
-                <InputNumber inputValue={inputValue}
-                             handleChange={handleChange}
-                             errors={errors}
-                />
-</div>
-                {/*<p className = 'errors' >{errors}</p>*/}
 
-                {/*<input type='file'*/}
-                {/*       id='file'*/}
-                {/*       accept="image/jpg, image/jpeg"*/}
-                {/*       placeholder='załącz'*/}
-                {/*       onChange={e => setImage(e.target.files[0])}*/}
-                {/*       className='inputFile'*/}
-                {/*/>*/}
-
-                {/*<label for='file'*/}
-                {/*       className='inputLabel--file'*/}
-                {/*>*/}
-                {/*    Wybież plik*/}
-                {/*</label>*/}
+                    <InputNumber inputValue={inputValue}
+                                 selectValue={selectValue}
+                                 handleChange={handleChange}
+                                 errors={errors}
+                    />
+                </div>
 
                 <PhotoContainer previev={previev}
-                                setImage = {setImage}
+                                setImage={setImage}
                 />
 
                 {sented && <h1>wyslane</h1>}

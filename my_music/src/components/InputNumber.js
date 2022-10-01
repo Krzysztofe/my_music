@@ -1,6 +1,6 @@
-const InputNumber = ({inputValue, handleChange, errors}) => {
+const InputNumber = ({inputValue, selectValue, handleChange, errors}) => {
 
-    if (inputValue.select === 'osoba') {
+    if (selectValue === 'Osoba') {
 
         return (
             <div className='inputContainer'>
@@ -17,7 +17,7 @@ const InputNumber = ({inputValue, handleChange, errors}) => {
                 <p className = 'errors' >{errors}</p>
             </div>
         )
-    } else if (inputValue.select === '') {
+    } else if (selectValue === 'Wybierz') {
         return (
             <div className='inputContainer'>
                 <label className = 'inputLabel'
