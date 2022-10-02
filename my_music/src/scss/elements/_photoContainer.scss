@@ -2,24 +2,11 @@
   width: 100%;
   margin-top: $space-large;
 }
+
 .inputFile {
   display: none;
 }
 
-.inputFile__label {
-  display: flex;
-  justify-content: center;
-  width: 40%;
-  padding: 0.4em 0;
-  background-color: $color-opacity;
-  cursor: pointer;
-  font-weight: bold;
-
-  &:focus,
-  &:hover {
-    background-color: $color-white;
-  }
-}
 
 .photoContainer {
   display: flex;
