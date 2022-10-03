@@ -1,0 +1,16 @@
+.imageContainer{
+  height: 100px;
+  margin-top: $space-large;
+}
+
+.image {
+  width: 100px;
+  height: 100px;
+}
+
+
+@include media {
+.imageContainer{
+  margin-top: $space-large * 1.5;
+}
+}

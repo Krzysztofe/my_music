@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
-import {validation} from './Library'
+import {validation} from './Validation'
 import InputText from "./InputText";
 import InputSelect from "./InputSelect";
 import InputNumber from "./InputNumber";
 import ButtonImg from "./ButtonImg";
 import ImageContainer from "./ImageContainer";
 import ButtonSubmit from "./ButtonSubmit";
-import {apiXXX, postData} from "./FetchOperations";
+import {postData} from "./FetchOperations";
 
 const Form = () => {
 
@@ -15,13 +15,11 @@ const Form = () => {
     })
     const [image, setImage] = useState('')
     const [selectValue, setSelectValue] = useState('Wybierz')
-    const [errors, setErrors] = useState([])
     const [formData, setFormData] = useState({})
 
+    const [errors, setErrors] = useState([])
+    const [preview, setPreview] = useState('')
 
-    const [previev, setPreviev] = useState('')
-
-    const [sented, setSented] = useState(false)
     const [pending, setPending] = useState(false)
     const [fetchError, setFetchError] = useState(null)
 
@@ -49,18 +47,25 @@ const Form = () => {
         if (image) {
             const reader = new FileReader()
             reader.onloadend = () => {
-                setPreviev(reader.result)
+                setPreview(reader.result)
             }
             reader.readAsDataURL(image)
         } else {
-            setPreviev(null)
+            setPreview(null)
         }
     }, [image])
 
 
+    useEffect(() => {
+        if (selectValue === 'Osoba') {
+            setInputValue({...inputValue, nip: ''})
+        } else if (selectValue === 'Firma') {
+            setInputValue({...inputValue, pesel: ''})
+        }
+    }, [selectValue])
+
     const handleSubmit = (e) => {
         e.preventDefault()
-
         setErrors(validation(inputValue, selectValue))
         if (validation(inputValue, selectValue).length > 0) {
             return
@@ -72,7 +77,6 @@ const Form = () => {
         })
 
         setFormData({
-            ...formData,
             name: inputValue.name,
             surname: inputValue.surname,
             pesel: inputValue.pesel,
@@ -83,52 +87,41 @@ const Form = () => {
         setImage('')
         setPending(true)
 
-        postData (apiXXX, formData, setFetchError, setPending)
+        postData(formData, setFetchError, setPending)
     }
 
-
-    // https://jsonplaceholder.typicode.com/posts/
-
-    // https://localhost:60001/Contractor/Save
-    // https://localhost:60001/Contractor/Save
-
     return (
-        <>
-            <form onSubmit={handleSubmit}
-                  className='form'>
+        <form onSubmit={handleSubmit}
+              className='form'>
 
-                <div className="inputs">
+            <div className="inputs">
 
-                    <InputText label={'Imię'} name={'name'}
-                               inputValue={inputValue.name}
-                               handleChange={handleChange}/>
+                <InputText label={'Imię'} name={'name'}
+                           inputValue={inputValue.name}
+                           handleChange={handleChange}/>
 
-                    <InputText label={'Nazwisko'} name={'surname'}
-                               inputValue={inputValue.surname}
-                               handleChange={handleChange}/>
+                <InputText label={'Nazwisko'} name={'surname'}
+                           inputValue={inputValue.surname}
+                           handleChange={handleChange}/>
 
-                    <InputSelect selectValue={selectValue}
-                                 handleSelect={handleSelect}
-                        // handleChange={handleChange}
-                    />
+                <InputSelect selectValue={selectValue}
+                             handleSelect={handleSelect}/>
 
+                <InputNumber inputValue={inputValue}
+                             selectValue={selectValue}
+                             handleChange={handleChange}
+                             errors={errors}/>
 
-                    <InputNumber inputValue={inputValue}
-                                 selectValue={selectValue}
-                                 handleChange={handleChange}
-                                 errors={errors}/>
+                <ButtonImg setImage={setImage}/>
 
-                    <ButtonImg setImage={setImage}/>
+                <ButtonSubmit pending={pending}
+                              fetchError={fetchError}/>
+            </div>
 
-                    <ButtonSubmit pending={pending}
-                                  fetchError={fetchError}/>
-                </div>
-                <ImageContainer previev={previev}
-                fetchError={fetchError}/>
+            <ImageContainer preview={preview}
+                            fetchError={fetchError}/>
 
-            </form>
-        </>
-
+        </form>
     );
 };
 

@@ -1,6 +1,4 @@
-import Button from "./ButtonSubmit";
-
-const ButtonImg = ({previev, setImage, pending}) => {
+const ButtonImg = ({setImage}) => {
     return (
         <>
 
@@ -16,16 +14,7 @@ const ButtonImg = ({previev, setImage, pending}) => {
                        className='input'>
                     Wybierz plik
                 </label>
-
             </div>
-
-            {/*<div className='photo'>*/}
-            {/*    {previev &&*/}
-            {/*        <img src={previev}*/}
-            {/*             className='photo'*/}
-            {/*        />*/}
-            {/*    }*/}
-            {/*</div>*/}
         </>
     );
 };

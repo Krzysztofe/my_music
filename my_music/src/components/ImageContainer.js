@@ -1,13 +1,10 @@
-const ImageContainer = ({previev, fetchError}) => {
+const ImageContainer = ({preview}) => {
     return (
 
-            <div className='photo'>
-                {previev &&
-                    <img src={previev}
-                         className='photo'/>
-                }
-                {fetchError &&
-                    <p>{fetchError}</p>
+            <div className='imageContainer'>
+                {preview &&
+                    <img src={preview}
+                         className='image'/>
                 }
             </div>
     );

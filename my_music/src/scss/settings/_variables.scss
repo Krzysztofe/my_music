@@ -1,20 +1,11 @@
 $font-family: 'Open Sans', sans-serif;
 
 $font-size-large: clamp(1rem, 5vw, 1.1rem);
-//$font-size-large:  1.2rem;
-//$font-size-large:  1rem;
-//$font-size-large:  5vw;
 $font-size-middle: clamp(0.8rem, 2vw, 1.1rem);
-$font-size-small: clamp(0.7rem, 2vw, 0.9rem);
-$font-size-superSmall: clamp(0.5em, 1.5vw, 0.7em);
-
-$light: 300;
-$regular: 400;
-$semiBold: 600;
+$font-size-small: clamp(0.5em, 1.5vw, 0.7em);
 
 $space-small: 0.5rem;
 $space-large: 1rem;
 
-$color-opacity: rgba(255,255,255, 0.7);;
 $color-white: #ffffff;
 $color-black: #040404;
