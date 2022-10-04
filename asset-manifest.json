@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/my_music/static/css/main.45501329.css",
+    "main.js": "/my_music/static/js/main.78eab6f2.js",
+    "static/media/pexels-sebastian-palomino-1955134.jpg": "/my_music/static/media/pexels-sebastian-palomino-1955134.40f914d7104f88384a85.jpg",
+    "index.html": "/my_music/index.html",
+    "main.45501329.css.map": "/my_music/static/css/main.45501329.css.map",
+    "main.78eab6f2.js.map": "/my_music/static/js/main.78eab6f2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.45501329.css",
+    "static/js/main.78eab6f2.js"
+  ]
+}
