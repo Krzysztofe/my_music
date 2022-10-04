@@ -1,9 +1,8 @@
 const BASE_URL = 'https://localhost:60001/Contractor/Save';
-const apiXXX = 'https://api.github.com/users';
 
 export const postData = (formData, setFetchError, setPending) => {
 
-    fetch(apiXXX,
+    fetch(BASE_URL,
         {
             method: 'POST',
             body: JSON.stringify(formData),
@@ -13,7 +12,6 @@ export const postData = (formData, setFetchError, setPending) => {
         }
     ).then(res => {
         if (res.ok) {
-            console.log(res)
             setFetchError(null)
             setPending(false)
         } else {
